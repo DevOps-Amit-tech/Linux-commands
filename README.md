@@ -1,4 +1,5 @@
-# Linux-commands
+Linux is an open source operating system developed by Linus Torvalds. Linux is just a kernel and a linux distribution makes it a usable operating system.
+ 
 ### 1. What is Kernel?
 kernel is the core of the operating system that manages everything. Kernel is kind of a thing which interacts with your hardware and manages CPU resources, memory resources, processes on any computer.
 
@@ -105,9 +106,9 @@ No permissions |  | 0
     -  is for removing permissions
     =  is for replacing existing permissions
     chmod o+r file1       provide read permissions for others for file1
-    chmod o+r+w+x file1	  provide all permissions to others
-    chmod u+x,g-w file1	  add execute permission to owner and remove write permission to group
-    chmod u=w file1		    Replace existing permissions with new permissions (For suppose owner has rwx permissions and you want to replace with only write permission then you                             can use this)
+    chmod o+r+w+x file1   provide all permissions to others
+    chmod u+x,g-w file1   add execute permission to owner and remove write permission to group
+    chmod u=w file1       Replace existing permissions with new permissions (For suppose owner has rwx permissions and you want to replace with only write permission then you                             can use this)
   
 **10.2. Types of ownership:** 
 owner | Notation
@@ -140,6 +141,42 @@ When you list files or directories, you can identify a file type by viewing the 
 ![image](https://user-images.githubusercontent.com/43535914/126990264-4d9aecf8-0caa-434e-b436-b1fb07e52752.png)
 
   
-### 12. 
-  
-  
+## Linux-commands 
+#### VIEW FILES/DIRECTORIES
+Command |	Usage	| Description
+------- | ----- | -----------
+ls | ls |	lists all directories/files in the current terminal directory.
+|  | ls -l	| lists files/folders in long table format (shows file/directory size, modified date & 		 time,ownership,permissions)
+|  | ls –a	| List all the files including the hidden ones
+|  | ls –t |	List the files sorted by last modified time
+|  | ls -lrt  (or)  ll |	lists the contents of the directory with all the details, in reverse order of their modification time (older files will be displayed first).
+pwd |  |	Show present working directory path.
+tree	| tree \<dir_name\> | view hierarchical structure of a directory in tree format.
+file | file \<filename\> | Determine the type of a file
+
+#### READ A FILE
+Command	| Usage	| Description
+------- | ----- | -----------
+cat	| cat \<filename\> | Read contents of the file
+less | less \<filename\>	| Displays contents of file page by page. With cat command if the file is huge, it will quickly scroll everything and you can see only bottom part of file. To have file navigational control you can use less command. (give enter to navigate page, use “q” to come out of the command)
+head | head \<filename\> | To view first 10 lines of a file.
+|  | head -5 \<filename\> |	To view first 5 lines of file.
+tail	| tail \<filename\>	| output the last 10 lines of file  
+
+#### CREATE AND DELETE FILES/DIRECTORIES
+Command	| Usage	| Description
+------- | ----- | -----------
+touch | touch \<filename\> | It is used to create empty file (0 bytes). It is also used to create, change and modify time stamps of a file.
+vi | vi \<filename\> | Create a file using vi editor: <br> Press key “ i ” for insert mode as it allows you to enter text as needed. <br> Press **ESCAPE** key once you are done with file. <br>  **:wq** --- Save and quit (w for save and q for quit). <br>  **:q** --- quit without save if no changes are made to file. <br> **:q!** --- quit without saving changes made to a file
+cat |	cat > [filename]	| Create a file and insert contents to that file on terminal. Press Ctrl+D to exit. If file already exists it overwrites.
+|  | cat [file1] \> [file2] | Copy contents of one file to another. (\>  Can also be used to redirect the output of cat command to a file rather than standard output)
+|  |cat [file1] \>\> [file2] | Instead of overwriting file2, it appends contents of file1 to file2 using redirection operator \>\>
+|  |	cat \>\> file.txt << EOF <br> Insert multiple lines <br> EOF	| Write multiple lines from the command line.  <br> **Ex:** <br> cat << EOF <br> The current working directory is: $PWD <br> You are logged in as: $(whoami) <br> EOF
+mkdir	| mkdir \<dir_name\> | Creates a directory
+|  |	mkdir -p d1/d2/d3	| Create multiple sub directories (-p means Parent)
+rmdir	| rmdir \<dir\>	| Removes empty directory
+rm |	rm \<file\>	| Delete a file
+|  | rm -r \<dir\> |	Delete empty/non-empty directories recursively.
+|  | rm -f \<file\>	| Prompts error while deleting non-existent file/directory. Use -f to suppress such prompts
+
+
