@@ -70,10 +70,76 @@ In Linux, installation files are distributed as packages. A repository is a stor
 
 Likewise "yum" is a repository for CentOS, "apk" is a repository for Alpine, etc
   
-### 9.   
+### 9.  Basic linux commands:
+Command | Usage | Description
+------- | ----- | ------------
+date |  | Show the current date and time
+cal	|	 | Show the month's calendar
+history |	 | Displays a list of all recently used commands.
+alias	|  | Defines shortcut for a long command
+man	| man \<command name\> |	Displays a help page based on your search query
+whatis |	whatis \<command name\> |	Displays brief description of command
+echo	| echo “Hello” |	Display contents
+
+### 10. File permissions:
+**10.1. Types of permissions:**
+Permission | Alphabetical notation | Numerical notation
+---------- | --------------------- | ------------------
+Read |	r |	4
+Write	| w	| 2
+Execute	| x	| 1
+No permissions |  | 0   
+
+**chmod:** This command changes the read, write, and execute permissions of a file/folder.
+
+**Ex:**
+##### Change permissions using numerical notation:
+    chmod 755 <File/Folder name>
+    Here 7, 5 and 5 individually represent permissions of User, Group and Others
+
+##### Recursively apply permissions to all sub-folders and files recursively
+    chmod -R 755 <Folder name>
+
+##### Change permissions using alphabetical notation:
+    +  is for giving permissions
+    -  is for removing permissions
+    =  is for replacing existing permissions
+    chmod o+r file1       provide read permissions for others for file1
+    chmod o+r+w+x file1	  provide all permissions to others
+    chmod u+x,g-w file1	  add execute permission to owner and remove write permission to group
+    chmod u=w file1		    Replace existing permissions with new permissions (For suppose owner has rwx permissions and you want to replace with only write permission then you                             can use this)
+  
+**10.2. Types of ownership:** 
+owner | Notation
+----- | --------
+User | u
+Group | g
+Others | o
+
+**chown:** This command changes the user and/or user group that owns a file/folder.
+
+**Syntax:**  chown USER:GROUP <File/Folder name>
+**Ex:**
+    Both user & group:   chown dave:mary example.txt
+    Only user:           chown dave: example.txt
+    Only group:          chown :mary example.txt
+  
+### 11. Identifying file types:
+A file type helps us in identifying the type of content that is saved in the file. Linux supports seven different types of files. 
+Symbol	| Type of file
+------- | ------------
+\-	| Normal file
+b	| Block special file (Hard disk or floppy disk)
+c	| Character special file
+s | local socket file
+d	| Directory
+l	| Link files
+p | named pipe
+  
+When you list files or directories, you can identify a file type by viewing the first character as shown below.
+![image](https://user-images.githubusercontent.com/43535914/126990264-4d9aecf8-0caa-434e-b436-b1fb07e52752.png)
 
   
-  
-  
+### 12. 
   
   
