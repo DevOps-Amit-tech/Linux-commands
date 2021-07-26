@@ -175,7 +175,7 @@ cat |	cat > [filename]	| Create a file and insert contents to that file on termi
 mkdir	| mkdir \<dir_name\> | Creates a directory
 |  |	mkdir -p d1/d2/d3	| Create multiple sub directories (-p means Parent)
 rmdir	| rmdir \<dir\>	| Removes empty directory
-rm |	rm \<file\>	| Delete a file
+| rm |	rm \<file\>	| Delete a file
 |  | rm -r \<dir\> |	Delete empty/non-empty directories recursively.
 |  | rm -f \<file\>	| Prompts error while deleting non-existent file/directory. Use -f to suppress such prompts
 
