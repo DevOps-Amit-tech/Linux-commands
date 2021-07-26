@@ -35,9 +35,45 @@ Directory Name | Description
 /sbin | It contains commands used by only Super User(root) (Super user's binary files)
 /var | Contains variable data like mails, log files
 
-### 6. 
+### 6. Terminal:
+Terminal or command line or command prompt is basically a text interface to your computer. It allows us to send simple text commands to our computer to do things like navigate through a directory, copy a file, etc.
 
+![image](https://user-images.githubusercontent.com/43535914/126983919-41650416-3a27-4641-ba95-7c725a9ebe24.png)
 
+**\#** prompt indicates root user whereas **$** prompt indicates other users.
 
+#### Below are few terminal shortcuts:
+Command | Description
+------- | --------------
+ctrl+Alt+T |	Open terminal
+ctrl+c | Stop the current command execution
+TAB key |	To auto complete file or folder names
+ctrl+a	| move cursor to beginning of line
+ctrl+f	| move cursor to end of line
+clear (or) ctrl+l	| To clear the terminal screen.
+exit | close the terminal or logout of current session.
+Up and Down arrow keys | To cycle through recently used commands in the terminal.
 
+### 7. Commands in linux:
+Linux commands are simply programs which are executed by the shell. In linux there are thousands of commands. Sometimes the command which you are executing may not be available in your OS. In that case download & install required package from respective repository (like apt, yum) and then execute.
 
+**Ex:**
+"command not found" error while executing tree command
+tree is a command which is available in tree package. Download tree package and then execute that command
+
+### 8. Installing softwares/packages:
+In Linux, installation files are distributed as packages. A repository is a storage location from which your system retrieves and installs OS updates and applications. It is like a warehouse that consists of all packages.
+
+**Ex:** Inorder to install a package in ubuntu
+1. update the repository			                It will update/install dependent packages   apt-get update                    
+2. Download & install the required package		It will install actual software             apt-get install <package-name>
+
+Likewise "yum" is a repository for CentOS, "apk" is a repository for Alpine, etc
+  
+### 9.   
+
+  
+  
+  
+  
+  
