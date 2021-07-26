@@ -90,7 +90,7 @@ Write	| w	| 2
 Execute	| x	| 1
 No permissions |  | 0   
 
-**chmod:** This command changes the read, write, and execute permissions of a file/folder.
+"chmod" command is used to change the read, write, and execute permissions of a file/folder.
 
 **Ex:**
 ##### Change permissions using numerical notation:
@@ -116,7 +116,7 @@ User | u
 Group | g
 Others | o
 
-**chown:** This command changes the user and/or user group that owns a file/folder.
+"chown" command is used to change the user and/or group that owns a file/folder.
 
 **Syntax:**  chown USER:GROUP <File/Folder name>
 **Ex:**
