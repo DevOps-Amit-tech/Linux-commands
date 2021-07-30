@@ -140,7 +140,37 @@ p | named pipe
 When you list files or directories, you can identify a file type by viewing the first character as shown below.
 ![image](https://user-images.githubusercontent.com/43535914/126990264-4d9aecf8-0caa-434e-b436-b1fb07e52752.png)
 
-  
+
+### 11. what is the use of !! command?
+Simply typing !! in command line will repeat the execution of your previous command
+If you use it in conjunction with some other command then your last run command will be replaced by !! 
+![image](https://user-images.githubusercontent.com/43535914/127644819-0faec6be-5e0a-4b66-8e8f-cf5b81667ca3.png)
+
+### 12. What is the use of nohup command? 
+Nohup, short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. The nohup command executes another program specified as its argument and ignores all SIGHUP (hangup) signals. SIGHUP is a signal that is sent to a process when its controlling terminal is closed. <br> Usually, when you run a program over SSH, if your connection drops or you log out, the session is terminated and all the processes executed from the terminal will stop. This is where the nohup command comes in handy. It ignores all hangup signals, and the process will continue to run. 
+
+To run the command in the background, append the & symbol at the end of the command as shown below.
+ 
+    syntax: nohup \<some command\> &
+    Ex: nohup java -jar abc.jar &
+    o/p: [1] 25177
+    The output includes the shell job ID (surrounded with brackets) and process ID. You can use the job ID to bring the command into the foreground using the fg command.
+ 
+*Note:* 
+ 
+- nohup redirects the command output to the nohup.out file. This file is created in the current working directory. If the user running the command doesn’t have write permissions to the working directory, the file is created in the user’s home directory.
+- If you don't include **&** at the end command then it will run the command in foreground giving the following output. Using nohup in the foreground is not very useful because you won’t be able to interact with the shell until the command completes.
+ 
+**o/p:**  nohup: ignoring input and appending output to 'nohup.out'
+
+### 12. What is /etc/resolv.conf file?
+It is a file to configure DNS nameservers.
+ 
+**Ex:**
+ 
+    search devops.local
+    nameserver 172.16.192.55
+ 
 ## Linux-commands 
 #### VIEW FILES/DIRECTORIES
 Command |	Usage	| Description
