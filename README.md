@@ -141,12 +141,12 @@ When you list files or directories, you can identify a file type by viewing the 
 ![image](https://user-images.githubusercontent.com/43535914/126990264-4d9aecf8-0caa-434e-b436-b1fb07e52752.png)
 
 
-### 11. what is the use of !! command?
+### 12. what is the use of !! command?
 Simply typing !! in command line will repeat the execution of your previous command
 If you use it in conjunction with some other command then your last run command will be replaced by !! 
 ![image](https://user-images.githubusercontent.com/43535914/127644819-0faec6be-5e0a-4b66-8e8f-cf5b81667ca3.png)
 
-### 12. What is the use of nohup command? 
+### 13. What is the use of nohup command? 
 Nohup, short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. The nohup command executes another program specified as its argument and ignores all SIGHUP (hangup) signals. SIGHUP is a signal that is sent to a process when its controlling terminal is closed. <br> Usually, when you run a program over SSH, if your connection drops or you log out, the session is terminated and all the processes executed from the terminal will stop. This is where the nohup command comes in handy. It ignores all hangup signals, and the process will continue to run. 
 
 To run the command in the background, append the & symbol at the end of the command as shown below.
@@ -163,8 +163,8 @@ To run the command in the background, append the & symbol at the end of the comm
  
 **o/p:**  nohup: ignoring input and appending output to 'nohup.out'
 
-### 12. What is /etc/resolv.conf file?
-It is a file to configure DNS nameservers.
+### 14. What is /etc/resolv.conf file?
+The /etc/resolv. conf is resolver configuration file. It is used to configure DNS nameservers.
  
 **Ex:**
  
