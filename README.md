@@ -179,4 +179,97 @@ rmdir	| rmdir \<dir\>	| Removes empty directory
 |  | rm -r \<dir\> |	Delete empty/non-empty directories recursively.
 |  | rm -f \<file\>	| Prompts error while deleting non-existent file/directory. Use -f to suppress such prompts
 
+#### MANAGE FILES/DIRECTORIES
+Command	| Usage	| Description
+------- | ----- | -----------
+cd	| cd | /path/to/directory	Change directory
+|  |	cd  (or)  cd ~ 	| Navigate to home directory
+|  |	cd /	| Move to root directory
+|  |	cd ..	| Navigating up one directory level (Ex: If you are in /usr/bin folder then typing cd .. command will navigate to /usr folder)
+cp |	cp \<file1\> \<file2\>	| Makes a copy of a file
+|  |	cp -p \<file1\> \<file2\> |	Copy file by preserving time stamp.
+|  | cp -i \<file1\> \<file2\>	| cp and mv commands doesn’t prompt while overwriting an existing file. Use -i interactive option to enable prompt.
+|  |	\cp \<file1\> \<file2\> |	Use a backward slash before the cp command to force cp command to overwrite without confirmation 
+|  |	cp \<file\> \<dir\> |	Copy file to a directory
+|  |	cp -r \<dir1\> <dir2\>	| copy dir1 to dir2; create dir2 if it doesn't exist
+mv	|	 | mv can be used to rename or move a file
+|  |	mv \<file1\> \<file2\>	| Renames a file if moved in same dir (file1 disappears and file2 appears with same content as file1)
+|  |	mv \<file1\> \<dir\>	| Move a file to a directory (mv command works like cut and paste)
+diff	| diff \<file1\> \<file2\>	| compares two text files and shows the differences between them.
+stat |  |	Display when a file was last accessed, modified, or changed.
+ 
+#### FINDING FILES AND DIRECTORIES
+Command	| Usage	| Description
+------- | ----- | -----------
+whereis	| whereis \<filename\>	| Shows possible locations of file.
+which	| which \<filename/app\> |	Shows which app will be run by default. <br> **Ex:** which java
+locate |	locate \<filename\>	| Find all instances of file using indexed database built from updatedb command. It searches a prebuilt database of files (updatedb) that needs to be updated regularly (once a day). Much faster than find, but if a file is deleted still will show matched, if the file image still exist in the database.
+find	| find \<folder-path-in-which-to-find\> -options \<filename\>	| Find all instances of a files/directories in real system. <br> **Ex:1** find /home -name test.txt <br> Find a file named test.txt under /home directory. Use -iname option if you want to ignore case (ie., filename can contain upper/lower case letters) <br> **Ex:2** find / -type d -name "tomcat" <br> Find directory named tomcat under / path
+ 
+#### LINKS
+Link is similar to the shortcut concept that we have in windows. Imagine that you have files in D drive. You can create a shortcut on desktop so that you can simply click on shortcut and start accessing the files. 
+There are two types of links available.
+-  Soft link
+-  Hard link
+##### 1. Soft link:  (Shortcut file)
+With soft link you can use the shortcut to access data as long as the original data is present.
+Syntax:	ln -s {source-filename} {symbolic-filename}
 
+**Ex:**  To create a soft link named file2 for file1 (both in the current directory). Whatever content present file1, the same content you can see via file2.
+ 
+    ln -s file1 file2
+##### Advantage of soft link:
+Suppose there are files which you don’t want to give direct access to some users. In that case you can create a soft link out of original files and give soft link file access to other users. So even if the soft link file gets deleted, the original data will still remain. But if the original data itself is deleted then the soft link cannot do anything.
+
+##### 2. Hard link:  (Backup file)
+In case of hard link even though the original file is deleted still you can access the data via hard link file.
+Syntax:	ln {source-filename} {symbolic-filename}
+ 
+**Ex:** To create a hard link named file2 for file1 (both in the same directory)
+ 
+    ln file1 file2
+##### Difference between copy and hard link?
+If you create a file1 with some content and copy it to file2 then it gets copied successfully. But if you make further modifications in file1 then those changes will not be reflected to file2. But with hard link all changes made to file1 will be reflected to file2.
+
+#### ENVIRONMENT VARIABLES
+Command	| Description | Example
+------- | ----------- | ---------
+echo $VARIABLE	| To display value of a variable | echo $PATH <br> To display value of PATH variable
+env	| Displays all environment variables | 
+VARIABLE_NAME=variable_value |	Create a new variable | VAR1=/usr/java/
+unset VARIABLE_NAME |	Remove a variable	| unset VAR1
+export Variable=value	| To set value of an environment variable |	export VAR1=/usr/tmp
+ 
+#### I/O REDIRECTION
+Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices.
+**Ex:** With the help of redirection operators you can copy the output of any command(s), file(s) into a file.
+Redirection	| Usage |	Description
+----------- | ----- | ------------
+Input Redirection \< |	command \< file |	**Ex:**  If you want to attach a file to email you can use the input re-direction operator in the following format. <br> mail -s "Subject" Recipient_MailID < Filename
+Output Redirection \> |	command \> file	| Redirecting output to a file. Instead of displaying output on the cmd screen it will redirect to file. <br> **Ex:1**  ls -l \> file1 <br> **Ex:2**  data \> file1 <br> If you enter wrong command and redirect the output to file then it will display error on screen. Error will not be stored in file
+Error redirection 2\>	|command 2\> file |	Redirects error message to the file you specify. <br> **Ex:1**  mkdir dir1/dir2/dir3 2\> file1 <br> It redirects the error message of mkdir to file1 <br> **Ex:2**  (data;cal) 2\> file1 <br> The error message will be redirected to file1 and the output of cal command will be displayed on screen.
+Redirecting output and error &\> |	command &\> file |	If you want to store both output and error message in a file. <br> **Ex:** (data;cal) &\> file1
+Appending \>\> |	command \>\> file | Append to file. If you do not want a file to be overwritten but want to add more content to an existing file
+Redirecting  error without overriding | 2\>\> |	command 2\>\> file |	Redirects error message without overriding the contents of file. <br> Every time you execute 2\>, it will override the previous error message that is stored in file. But with 2\>\> it will append the error to the file.
+Redirecting output and error without overriding &\>\> |	command &\>\> file |	Redirects both output and error without overriding the contents of file. Every time you execute &\>, it will override the previous output/error that is stored in file. But with &\>\> it will append the data to the file.
+Heredoc \<\< |	Command \<\< delimiter <br> Any text/input <br> delimiter | \<\< is a type of redirection that allows you to pass multiple lines of input to a command. It reads the input until it finds a line containing the specified delimiter. Delimiter can be of any name, but note that you end with the same delimiter. <br> **Ex:** <br> wc -l << EOF <br> This is a <br> simple lookup program <br> EOF <br> o/p:  2
+\| 	| command1 \| command2	| A pipe is a form of redirection that lets you run two or more commands, such that output of one command serves as input to the next command. <br> **Ex:** <br> head -5 file1 | tail -1 <br> head -5 file1 provides five lines and tail -1 provides last line that got from head command. So you will get fifth line from file1
+ 
+#### METACHARACTERS
+Symbol	| Description | Example
+------ | ----------- | --------- 
+&&	| AND conditional execution 	| command1 && command2
+\|\| |	OR conditional execution	| command1 \|\| command2
+; |	Command separator. Execute multiple commands at once such that each command is separated by a semi colon |	ls;date;cal
+( )	| Groups commands |	date;cal \> file1 <br> Output of date command will be displayed on CMD and output of cal command will be stored in file1. When there are multiple commands which are given on same line then the redirection operator will work only on the immediate command not on previous commands. <br> If you want to redirect output of multiple commands to a file then ensure that the commands are enclosed in parenthesis <br> (date;cal) \> file1
+$	| Variable substitution |	set name=Tom <br> Sets the variable name to Tom ; <br> echo $name <br> displays the value stored there
+&	| Run a command in the background	|  |
+| #	| Comment |	#This is a comment line
+\ |	Avoid interpretation of meta-characters. Any meta-character immediately following backslash loses its special meaning. Sometimes we need to pass meta-characters to the command being run and do not want the shell to interpret them | echo Hello; world <br> **o/p:** <br> Hello <br> -bash: world command not found <br> <br> echo Hello\\; world <br> **o/p:** <br> Hello; world
+‘ ‘	| All special characters between these quotes lose their special meaning | Consider an echo command that contains many special shell characters <br> echo \<-$1500.\*\*\>; <br> Putting a backslash in front of each special character is tedious and makes the line difficult to read. <br> echo \\<-\\$1500.\\*\\\*\\\>\\; <br> In that case simply Put a single quote (') at the beginning and at the end of the string. <br> echo '\<-$1500.\*\*\>;' 
+“ “ |	Use double quotes when you want to display the real meaning of special variables. Double quotes take away the special meaning of all characters except the following. <br> $ Parameter Substitution <br> ` Backquotes <br> \\$ Literal Dollar Sign <br> \\´ Literal Backquote <br> \\” Embedded Doublequote <br> \\\\ Embedded Backslashes	| **Ex:1:** echo "Hostname=$HOSTNAME ;  Current User=`whoami` ; Message=\\$ is USD" <br> **o/p:** Hostname=dev-db ;  Current User=Tom ; Message=$ is USD <br> **Ex:2** echo "Hello   \\"World\\"" <br> **o/p:** Hello   "World
+` `	| Anything in the back quote will be treated as a command and would be executed |	DATE=`date` <br> echo "Current Date: $DATE" <br> **o/p:** Current Date: Thu Jul  2 05:28:45 MST 2020
+ 
+ 
+ 
+ 
