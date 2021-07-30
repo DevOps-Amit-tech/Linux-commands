@@ -297,6 +297,8 @@ In Bash and other Linux shells, when a program is executed, it uses three standa
 - 0 - stdin, the standard input stream.
 - 1 - stdout, the standard output stream.
 - 2 - stderr, the standard error stream.
+When you execute a command, you might notice that the output/error messages are printed on the screen. With the help of above file descriptors, you can redirect them to a file. 
+ 
  
 #### I/O REDIRECTION
 Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices.
