@@ -270,6 +270,181 @@ $	| Variable substitution |	set name=Tom <br> Sets the variable name to Tom ; <b
 “ “ |	Use double quotes when you want to display the real meaning of special variables. Double quotes take away the special meaning of all characters except the following. <br> $ Parameter Substitution <br> ` Backquotes <br> \\$ Literal Dollar Sign <br> \\´ Literal Backquote <br> \\” Embedded Doublequote <br> \\\\ Embedded Backslashes	| **Ex:1:** <br> echo "Hostname=$HOSTNAME ; &nbsp; &nbsp; &nbsp; Current User=\`whoami\` ; Message=\\$ is USD" <br> **o/p:** <br> Hostname=dev-db ; &nbsp; &nbsp; &nbsp; Current User=Tom ; Message=$ is USD <br> <br> **Ex:2** <br> echo "Hello &nbsp; &nbsp; &nbsp; \\"World\\"" <br> **o/p:** <br> Hello &nbsp; &nbsp; &nbsp; "World
 \` \`	| Anything in the back quote will be treated as a command and would be executed |	D=\`date\` <br> echo "Current Date: $D" <br> **o/p:** <br> Current Date: Thu Jul  2 05:28:45 MST 2020
  
+ #### REGULAR EXPRESSIONS
+ A regular expression or regex is a pattern of text you define to filter text.
+**Below mentioned are few Wildcard characters:**
+Symbol	| Description | Example
+------ | ----------- | --------- 
+^ |	Matches start of the string |	**Ex:**  cat sample \| grep ^A <br> Display all lines that start with A
+$	| Matches end of string | **Ex:** <br> cat sample | grep s$ <br> Display all lines that end with s
+.	| Replaces any character	|  |
+[...] |	Any character within the specified range	| **Ex:** <br>  ls -l [abcdef]ile <br> The name of the file can start with either a or b or c or d or e or f. The first character should be one of the characters that are enclosed in square brackets.
+\*	| Represents zero or more number of characters. Those characters can be anything number/alphabet/special character. |	**Ex:** <br>  ls -l file* <br> Lists all files starting with word file followed by zero or any number of characters
+?	| Represents only one character	| **Ex:1** ls -l file? <br> It searches for all files whose name is starting with word file and then it should have only one character. <br> **Ex:2** ls -l file?? <br> It searches for all files whose name is starting with word file and then it should have two characters.
+ 
+#### TEXT PROCESSING
+Command	| Usage	| Description
+------- | ----- | -----------
+wc |	wc \<filename\> |	Prints the number of bytes, words and lines in a file.
+|  |	wc -l \<filename\> |	Prints number of lines in a file
+|  |	wc -w \<filename\> |	Prints number of words in a file
+|  |	ls -1 \| wc -l	| Prints number of files/directories
+sort |	sort \<filename\>	| Sort command by default performs alphabetical sort. Which means it sorts based on the first character. <br> **Ex:** <br> Consider file1 data like:  25 &nbsp; 34 &nbsp; 28 &nbsp; 33 &nbsp; 22 <br> **Output:** 25 &nbsp; 28 &nbsp; 22 &nbsp; 34 &nbsp; 33
+|  | sort -n \<filename\> |	Numerical sort. <br> For the same above example the output will be: <br> 22 &nbsp; 25 &nbsp; 28 &nbsp; 33 &nbsp; 34
+cut |	cut -d “\<delimiter\>” -f \<columns_to_display\> \<filename\>	| Cut is used for displaying data in column fashion. <br> **Ex:** Consider file1 data <br> Hi:Hello:Welcome <br> This:is:xxx <br> **Command:** cut -d “:“ -f 1,3 file1 <br> **Output:** Hi:Welcome <br>This:xxx	
+awk	|  |	awk is a general-purpose scripting language designed for advanced text processing. It is used for manipulating data and generating reports. <br> **Ex:** when you run "who" command perhaps we don’t need all of that information presented in the output, but, rather, just want to see the names on the accounts. We can use pipe and send the output from who into awk command, and then tell awk to print only the first field. <br> who \| awk '{print $1}'
+
+#### SEARCHING
+Command	| Usage	| Description
+------- | ----- | -----------
+grep | grep \<string\>	| Global Regular Expression Print (GREP) utility searches for specified string/pattern in a file/files and displays all lines containing that pattern. <br> **Ex:**  grep ubuntu /etc/passwd <br> It will search for text "ubuntu" in "/etc/passwd" path
+|  | grep -i \<string\> \<filename\> |	Since linux is case sensitive use -i option for case insensitive search. **Ex:** grep -i Ubuntu /etc/passwd
+|  | grep -n \<string\> \<filename\> |	Displays lines along with line number
+|  |	command \| grep \<pattern\> |	Search for pattern in the output of command <br> **Ex:** history \| grep "ls" <br> It will search for all the commands with "ls" from previous history of commands
+sed |	sed -i 's/old-text/new-text/g' file.txt |	(Stream editor) To find and replace text in a file. <br> s - Substitute, can be normal string or regex <br> g  -  Global replacement string <br> i  -  used to edit In-place on the file
+
+#### MANAGING USERS AND GROUPS
+Command | Description
+------- | -----------
+useradd \<username\>	(OR) adduser \<username\> |	Create/add new user. (Note: A home directory for user will be created under /home directory) 
+passwd	| Update password for your username 
+passwd \<username\>	| If you as root user, changing password for a particular user
+userdel \<username\>	| Delete user
+groupadd \<groupname\> |	Create a new group
+groupdel \<groupname\> |	Delete an existing group
+usermod –aG \<groupname\> \<username\>	| Add existing user to a secondary group. <br> When a user creates a file, the file’s group is set to the user’s primary group. Usually primary group is same as the name of the user (you can check this info in /etc/passwd file). 
+gpasswd –d \<username\> \<groupname\>	| Remove user from a group
+|  |	/etc/passwd  -  Contains user account information <br> /etc/group   -  Contains group account information <br> Whenever a new user is added, you can find an entry in these files
+su <username> |	used to switch to another user
+sudo su	 | To elevate your privileges to super user for subsequent command execution.
+visudo  (OR)  vi /etc/sudoers	| Sudoers file. You can provide sudo privileges to a user by adding user to this file.
+usermod -aG root \<username\>	| Adding user to root group. <br> **Ex:** Lets say you have Created a user, but that user is unable to view files under /root folder. In that case, add user to root group. Now the user will have read-only access and cannot modify any files. If user have to modify anything then user need to be added in sudoers file.
+ 
+#### CHECK USER INFORMATION
+Command | Description
+------- | -----------
+Whoami	| Displays as which user you are logged in as.
+finger \<username\>	| Display information about the user.
+users  (or)  id	| Shows user information
+w	| lists the currently logged in users and what they are doing.
+who |	lists the currently logged in users.
+last	| This picks information from /var/log/wtmp file to display the user login information. Shows list of all users logged in (and out) since that file was created. <br> **Ex:1**  last reboot <br> Display previous reboot date and time for the system. <br> **Ex:2**  last <username> <br> To view the user’s login and logout details
+ 
+Below are few files that contain user login information:
+ 
+    /var/run/utmp: It contains information about the users who are currently logged in. Who command is used to fetch the information from the file.
+    /var/log/wtmp: It keeps the users login and logout history. The last command uses this file to display the information.
+    /var/log/btmp: It contains bad login attempts. 
+
+#### CHECK SYSTEM INFORMATION
+Command | Description
+------- | -----------
+uname -a	| Displays system information, including machine name, kernel name & version, hardware, OS etc.
+arch |	To find whether it is 32 bit or 64 bit OS
+lscpu |	displays system’s CPU architecture information (such as number of CPUs, threads, cores, sockets, and more).
+cat /proc/cpuinfo |	Displays CPU information
+cat /proc/meminfo |	Displays memory information
+lsb_release -a  (OR)  cat /etc/lsb-release	| prints version information for the Linux release you're running. In some systems os-release file will be there instead of lsb-release file
+uptime	| Shows since how long system has been running, number of users currently logged in and also displays load average for 1,5 and 15 minutes intervals.
+shutdown |	Shutdown machine
+reboot |	Restart machine
+
+#### HARDWARE
+Command | Description
+------- | -----------
+df |	displays file system disk space usage for all mounted partitions. Shows the size, used space, and available space on the mounted file systems of your computer (Like C Drive in windows)
+df -Th \| grep "^/dev"	| To find the file system type
+fdisk -l	| Shows disk partitions, sizes and types
+fdisk -l \| grep Disk |	Display total hard disk size
+du |	Displays the disk usage by directory(directory space usage). <br> **Ex:** Faced issue as disk space full. <br> df -h command is showing that 44 GB is full, whereas in real it is not <br> Filesystem &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Size &nbsp;&nbsp;&nbsp; Used &nbsp;&nbsp; Avail &nbsp;&nbsp; Use% &nbsp;&nbsp; Mounted on <br> /dev/mapper/centos-home 44G &nbsp;&nbsp; 44G &nbsp;&nbsp; 53M &nbsp;&nbsp; 100% &nbsp;&nbsp; /home <br> du -h /home \| sort -rn <br> Used the above command to sort files under home directory by size in order to know which file/folder is consuming more disk space <br> du -h /home 2>/dev/null \| grep '[0-9\\.]\\+G' <br> This command shows disk usage for folders in GB
+free	| displays the amount of free and used memory in the system.
+grep MemTotal /proc/meminfo	| To get total amount of memory (ie., RAM size)
+lsblk |	List block devices
+Options or flags that can be used for df, du, free commands: megabytes (m), gigabytes (g), human readable (h)
+ 
+#### PROCESS RELATED
+Command	| Usage	| Description
+------- | ----- | -----------
+ps	| ps -ef \| grep java (OR) ps -aux	| (Process Status) Displays a list of currently running processes along with process id’s (PID). <br> -e means Display all processes <br> -f means Display a full listing
+pstree |  |		Visualizing processes in tree model
+kill	| kill \<pid\>	| Kill process by using process id(pid)
+|  |	kill -9 \<pid\> |	Force kill a process. Internally it sends a signal, and depending on what you want to do. (-9 signal to kill)
+killall	| Killall proc	| lets you kill all processes named proc.
+top	 |   | The top ('table of processes') command displays list of all running processes, sorted by how much CPU each processes uses. Unlike ps, this command regularly updates in real-time. Basically a terminal equivalent to Task Manager. To exit top, press "q"
+lsof |   |		Lists files that are open by processes
+fg	| fg \<Job_name\>	| Run a program in the foreground
+bg	|   |Run a service in background 
+ 
+#### NETWORK RELATED 
+Command	| Usage	| Description
+------- | ----- | ----------- 
+ifconfig (OR) ip addr show |   |		Stands for “interface configuration." It is used to view and change the configuration (IP address, network interfaces, bandwidth usage, and more) of the network interfaces on your system.
+hostname	|   |	Shows the system hostname
+|   |	hostname -i	| Displays ip address of the system
+|   |	vi /etc/hostname	| Location of file where you can change hostname of system. <br> The other place to change is /etc/hosts file and then restart the system.
+ping |	ping \<ip or hostname\>	| Used to check your connectivity status to a server and the speed of that network connection. 
+telnet |	telnet \<target_ip\> \<port\>	| Connect to remote host or check port availability status.
+dig |	dig gmail.com |	Look up a domain's DNS address. to get the IP address and information about the name servers of the domain gmail.com
+wget |	wget \<url\> |	lets you perform a non-interactive download of packages/software.
+curl	| curl \<url\>	| retrieve information and files from URL’s or internet addresses. Access the application as from browser.
+netstat	|	  | (Network statistics) provides information and statistics about protocols in use and current TCP/IP network connections. 
+|   |	netstat -tulpn \| grep LISTEN <br> (OR) <br> netstat -aon |	To check which ports are listening
+firewall	| firewall-cmd --state |	Check firewall status
+|   |	systemctl disable firewalld |	Disable firewall
+|   |	systemctl stop firewalld |	Stop firewall
+|   |	firewall-cmd --permanent --add-port=6443/tcp |	Add firewall rules on ports 
+ 
+#### SERVICE
+Command	| Usage	| Description
+------- | ----- | -----------  
+service	| service \<service_name\> start |	To start a service
+|   |	service \<service_name\> stop/status/restart/reload	| Likewise, can stop service or restart or check status of service whether it is running or not
+chkconfig |   |		It is used to list all available services and view or update their run level settings. This command controls which services are set to start on boot 
+ 
+#### REMOTE LOGIN 
+Command	| Usage	| Description
+------- | ----- | ----------- 
+ssh	| ssh [user-name]@[remote-ip] | SECURE SHELL. Used to connect and login to a remote server and provides secure encrypted communication (ssh default port 22)
+logout |   |		To logout from already taken remote console.
+ 
+#### FILE TRANSFER
+To copy files between servers
+**Windows to Linux:**		winscp
+
+**Linux to Linux:**		SCP (secure copy)
+Command	| Usage	| Description
+------- | ----- | -----------  
+scp	|  |	Command line utility that allows you to securely copy files and directories between two systems.
+|   |	scp root@192.168.0.106:/data/abc.txt /root/	| Used to check your connectivity status to a Copy Data from Remote System to Local
+|   |	scp /root/database.txt root@192.168.0.106:/data/	| Copy Data from Local System to remote (User -r option to recursively copy directory.
+
+ 
+#### COMPRESSION 
+
+ 
+#### CRONTAB 
+CronTab (Cron Table) is a system process that will automatically perform tasks as per the specific schedule.
+Crontab Syntax:
+Crontab of Linux has six fields. The first five fields define the time and date of execution, and the 6'th field is used for command execution. 
+![image](https://user-images.githubusercontent.com/43535914/127639759-6cb9b716-ce1b-413a-a875-c9305d925b97.png)
+- Astrics (*): Use for matching
+- Define range: Allows you to define a range with the help of hyphen like 1-10 or 30-40 or jan-mar, mon-wed.
+- Define multiple ranges: Allows you to define various ranges with command separated like apr-jun,oct-dec.
+**Ex:**  0 7,17 * * * /scripts/script.sh
+ 
+Command	| Description
+------- | -----------
+crontab -e |	Edit crontab
+crontab -l	| View crontab entries for current user
+crontab -u \<username\> -l |	View crontab entries of a specific user
+crontab -r |	Remove your crontab tasks 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
