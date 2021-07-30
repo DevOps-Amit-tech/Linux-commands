@@ -65,22 +65,22 @@ tree is a command which is available in tree package. Download tree package and 
 ### 8. Installing softwares/packages:
 In Linux, installation files are distributed as packages. A repository is a storage location from which your system retrieves and installs OS updates and applications. It is like a warehouse that consists of all packages.
 
-**Ex:** Inorder to install a package in ubuntu
-1. update the repository			                It will update/install dependent packages   apt-get update                    
-2. Download & install the required package		It will install actual software             apt-get install <package-name>
+**Ex:** Inorder to install a package in ubuntu 
+1. update the repository &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; It will update/install dependent packages &emsp;&nbsp; apt-get update                    
+2. Download & install the required package	&emsp;	It will install actual software &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; apt-get install <package-name>
 
 Likewise "yum" is a repository for CentOS, "apk" is a repository for Alpine, etc
   
 ### 9.  Basic linux commands:
 Command | Usage | Description
 ------- | ----- | ------------
-date |  | Show the current date and time
-cal	|	 | Show the month's calendar
-history |	 | Displays a list of all recently used commands.
-alias	|  | Defines shortcut for a long command
+date | date | Show the current date and time
+cal	|	cal | Show the month's calendar
+history |	history | Displays a list of all recently used commands.
+alias	| alias \<alias-name\>="some command" | Defines shortcut for a long command. <br> **Ex:** To create an alias named CD for command "cd /usr/local/bin" <br> alias CD="cd /usr/local/bin"  <br> Use *unalias \<alias-command\>* to delete an alias
 man	| man \<command name\> |	Displays a help page based on your search query
 whatis |	whatis \<command name\> |	Displays brief description of command
-echo	| echo “Hello” |	Display contents
+echo	| echo “Some text” |	Display contents
 
 ### 10. File permissions:
 **10.1. Types of permissions:**
@@ -154,6 +154,7 @@ pwd |  |	Show present working directory path.
 tree	| tree \<dir_name\> | view hierarchical structure of a directory in tree format.
 file | file \<filename\> | Determine the type of a file
 
+ 
 #### READ A FILE
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -162,6 +163,7 @@ less | less \<filename\>	| Displays contents of file page by page. With cat comm
 head | head \<filename\> | To view first 10 lines of a file.
 |  | head -5 \<filename\> |	To view first 5 lines of file.
 tail	| tail \<filename\>	| output the last 10 lines of file  
+
 
 #### CREATE AND DELETE FILES/DIRECTORIES
 Command	| Usage	| Description
@@ -179,6 +181,7 @@ rmdir	| rmdir \<dir\>	| Removes empty directory
 |  | rm -r \<dir\> |	Delete empty/non-empty directories recursively.
 |  | rm -f \<file\>	| Prompts error while deleting non-existent file/directory. Use -f to suppress such prompts
 
+ 
 #### MANAGE FILES/DIRECTORIES
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -198,6 +201,7 @@ mv	|	 | mv can be used to rename or move a file
 diff	| diff \<file1\> \<file2\>	| compares two text files and shows the differences between them.
 stat |  |	Display when a file was last accessed, modified, or changed.
  
+
 #### FINDING FILES AND DIRECTORIES
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -205,7 +209,8 @@ whereis	| whereis \<filename\>	| Shows possible locations of file.
 which	| which \<filename/app\> |	Shows which app will be run by default. <br> **Ex:** which java
 locate |	locate \<filename\>	| Find all instances of file using indexed database built from updatedb command. It searches a prebuilt database of files (updatedb) that needs to be updated regularly (once a day). Much faster than find, but if a file is deleted still will show matched, if the file image still exist in the database.
 find	| find \<folder-path-in-which-to-find\> -options \<filename\>	| Find all instances of a files/directories in real system. <br> **Ex:1** find /home -name test.txt <br> Find a file named test.txt under /home directory. Use -iname option if you want to ignore case (ie., filename can contain upper/lower case letters) <br> **Ex:2** find / -type d -name "tomcat" <br> Find directory named tomcat under / path
- 
+
+  
 #### LINKS
 Link is similar to the shortcut concept that we have in windows. Imagine that you have files in D drive. You can create a shortcut on desktop so that you can simply click on shortcut and start accessing the files. 
 There are two types of links available.
@@ -231,6 +236,7 @@ Syntax:	ln {source-filename} {symbolic-filename}
 ##### Difference between copy and hard link?
 If you create a file1 with some content and copy it to file2 then it gets copied successfully. But if you make further modifications in file1 then those changes will not be reflected to file2. But with hard link all changes made to file1 will be reflected to file2.
 
+
 #### ENVIRONMENT VARIABLES
 Command	| Description | Example
 ------- | ----------- | ---------
@@ -240,6 +246,7 @@ VARIABLE_NAME=variable_value |	Create a new variable | VAR1=/usr/java/
 unset VARIABLE_NAME |	Remove a variable	| unset VAR1
 export Variable=value	| To set value of an environment variable |	export VAR1=/usr/tmp
  
+
 #### I/O REDIRECTION
 Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices.
 **Ex:** With the help of redirection operators you can copy the output of any command(s), file(s) into a file.
@@ -255,6 +262,7 @@ Redirecting output and error without overriding &\>\> |	command &\>\> file |	Red
 Heredoc \<\< |	Command \<\< delimiter <br> Any text/input <br> delimiter | \<\< is a type of redirection that allows you to pass multiple lines of input to a command. It reads the input until it finds a line containing the specified delimiter. Delimiter can be of any name, but note that you end with the same delimiter. <br> **Ex:** <br> wc -l << EOF <br> This is a <br> simple lookup program <br> EOF <br> o/p:  2
 \| 	| command1 \| command2	| A pipe is a form of redirection that lets you run two or more commands, such that output of one command serves as input to the next command. <br> **Ex:** <br> head -5 file1 | tail -1 <br> head -5 file1 provides five lines and tail -1 provides last line that got from head command. So you will get fifth line from file1
  
+
 #### METACHARACTERS
 Symbol	| Description | Example
 ------ | ----------- | --------- 
@@ -270,6 +278,7 @@ $	| Variable substitution |	set name=Tom <br> Sets the variable name to Tom ; <b
 “ “ |	Use double quotes when you want to display the real meaning of special variables. Double quotes take away the special meaning of all characters except the following. <br> $ Parameter Substitution <br> ` Backquotes <br> \\$ Literal Dollar Sign <br> \\´ Literal Backquote <br> \\” Embedded Doublequote <br> \\\\ Embedded Backslashes	| **Ex:1:** <br> echo "Hostname=$HOSTNAME ; &nbsp; &nbsp; &nbsp; Current User=\`whoami\` ; Message=\\$ is USD" <br> **o/p:** <br> Hostname=dev-db ; &nbsp; &nbsp; &nbsp; Current User=Tom ; Message=$ is USD <br> <br> **Ex:2** <br> echo "Hello &nbsp; &nbsp; &nbsp; \\"World\\"" <br> **o/p:** <br> Hello &nbsp; &nbsp; &nbsp; "World
 \` \`	| Anything in the back quote will be treated as a command and would be executed |	D=\`date\` <br> echo "Current Date: $D" <br> **o/p:** <br> Current Date: Thu Jul  2 05:28:45 MST 2020
  
+
  #### REGULAR EXPRESSIONS
  A regular expression or regex is a pattern of text you define to filter text.
 **Below mentioned are few Wildcard characters:**
@@ -282,6 +291,7 @@ $	| Matches end of string | **Ex:** <br> cat sample | grep s$ <br> Display all l
 \*	| Represents zero or more number of characters. Those characters can be anything number/alphabet/special character. |	**Ex:** <br>  ls -l file* <br> Lists all files starting with word file followed by zero or any number of characters
 ?	| Represents only one character	| **Ex:1** ls -l file? <br> It searches for all files whose name is starting with word file and then it should have only one character. <br> **Ex:2** ls -l file?? <br> It searches for all files whose name is starting with word file and then it should have two characters.
  
+
 #### TEXT PROCESSING
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -294,6 +304,7 @@ sort |	sort \<filename\>	| Sort command by default performs alphabetical sort. W
 cut |	cut -d “\<delimiter\>” -f \<columns_to_display\> \<filename\>	| Cut is used for displaying data in column fashion. <br> **Ex:** Consider file1 data <br> Hi:Hello:Welcome <br> This:is:xxx <br> **Command:** cut -d “:“ -f 1,3 file1 <br> **Output:** Hi:Welcome <br>This:xxx	
 awk	|  |	awk is a general-purpose scripting language designed for advanced text processing. It is used for manipulating data and generating reports. <br> **Ex:** when you run "who" command perhaps we don’t need all of that information presented in the output, but, rather, just want to see the names on the accounts. We can use pipe and send the output from who into awk command, and then tell awk to print only the first field. <br> who \| awk '{print $1}'
 
+
 #### SEARCHING
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -302,6 +313,7 @@ grep | grep \<string\>	| Global Regular Expression Print (GREP) utility searches
 |  | grep -n \<string\> \<filename\> |	Displays lines along with line number
 |  |	command \| grep \<pattern\> |	Search for pattern in the output of command <br> **Ex:** history \| grep "ls" <br> It will search for all the commands with "ls" from previous history of commands
 sed |	sed -i 's/old-text/new-text/g' file.txt |	(Stream editor) To find and replace text in a file. <br> s - Substitute, can be normal string or regex <br> g  -  Global replacement string <br> i  -  used to edit In-place on the file
+
 
 #### MANAGING USERS AND GROUPS
 Command | Description
@@ -320,6 +332,7 @@ sudo su	 | To elevate your privileges to super user for subsequent command execu
 visudo  (OR)  vi /etc/sudoers	| Sudoers file. You can provide sudo privileges to a user by adding user to this file.
 usermod -aG root \<username\>	| Adding user to root group. <br> **Ex:** Lets say you have Created a user, but that user is unable to view files under /root folder. In that case, add user to root group. Now the user will have read-only access and cannot modify any files. If user have to modify anything then user need to be added in sudoers file.
  
+ 
 #### CHECK USER INFORMATION
 Command | Description
 ------- | -----------
@@ -336,6 +349,7 @@ Below are few files that contain user login information:
     /var/log/wtmp: It keeps the users login and logout history. The last command uses this file to display the information.
     /var/log/btmp: It contains bad login attempts. 
 
+ 
 #### CHECK SYSTEM INFORMATION
 Command | Description
 ------- | -----------
@@ -349,6 +363,7 @@ uptime	| Shows since how long system has been running, number of users currently
 shutdown |	Shutdown machine
 reboot |	Restart machine
 
+ 
 #### HARDWARE
 Command | Description
 ------- | -----------
@@ -362,6 +377,7 @@ grep MemTotal /proc/meminfo	| To get total amount of memory (ie., RAM size)
 lsblk |	List block devices
 Options or flags that can be used for df, du, free commands: megabytes (m), gigabytes (g), human readable (h)
  
+
 #### PROCESS RELATED
 Command	| Usage	| Description
 ------- | ----- | -----------
@@ -374,7 +390,8 @@ top	 |   | The top ('table of processes') command displays list of all running
 lsof |   |		Lists files that are open by processes
 fg	| fg \<Job_name\>	| Run a program in the foreground
 bg	|   |Run a service in background 
- 
+
+
 #### NETWORK RELATED 
 Command	| Usage	| Description
 ------- | ----- | ----------- 
@@ -394,6 +411,7 @@ firewall	| firewall-cmd --state |	Check firewall status
 |   |	systemctl stop firewalld |	Stop firewall
 |   |	firewall-cmd --permanent --add-port=6443/tcp |	Add firewall rules on ports 
  
+ 
 #### SERVICE
 Command	| Usage	| Description
 ------- | ----- | -----------  
@@ -401,12 +419,14 @@ service	| service \<service_name\> start |	To start a service
 |   |	service \<service_name\> stop/status/restart/reload	| Likewise, can stop service or restart or check status of service whether it is running or not
 chkconfig |   |		It is used to list all available services and view or update their run level settings. This command controls which services are set to start on boot 
  
+ 
 #### REMOTE LOGIN 
 Command	| Usage	| Description
 ------- | ----- | ----------- 
 ssh	| ssh [user-name]@[remote-ip] | SECURE SHELL. Used to connect and login to a remote server and provides secure encrypted communication (ssh default port 22)
 logout |   |		To logout from already taken remote console.
  
+
 #### FILE TRANSFER
 To copy files between servers
 **Windows to Linux:**		winscp
@@ -418,7 +438,7 @@ scp	|  |	Command line utility that allows you to securely copy files and directo
 |   |	scp root@192.168.0.106:/data/abc.txt /root/	| Used to check your connectivity status to a Copy Data from Remote System to Local
 |   |	scp /root/database.txt root@192.168.0.106:/data/	| Copy Data from Local System to remote (User -r option to recursively copy directory.
 
- 
+
 #### COMPRESSION 
 
  
