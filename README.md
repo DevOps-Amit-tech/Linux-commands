@@ -170,6 +170,21 @@ The /etc/resolv. conf is resolver configuration file. It is used to configure DN
  
     search devops.local
     nameserver 172.16.192.55
+
+### 14. What is /dev/null? 
+/dev/null in Linux is a null device file. It’s a special file that’s present in every single Linux system. However, unlike most other virtual files, instead of reading, it’s used to write. Whatever you write to /dev/null will be discarded, forgotten into the void. This is a command-line hack that acts as a vacuum, that sucks anything thrown to it.
+This is not an executable file, so we cannot use piping using | operator to redirect to /dev/null. The only way is to use file redirections (\>, \>\>, or \<, \<\<).
+**Ex:**
+Lets say you are searching for a string "hello" in "/usr" directory. However, it will generate a lot of error as without root privilege, grep can’t access a number of files. In such a case, it’ll result in “Permission denied” errors. 
+grep -r hello /usr/
+
+![image](https://user-images.githubusercontent.com/43535914/127679508-4863d34a-ff2d-49f4-835c-44cd76e08c76.png)
+
+Now, we can get a clearer output by redirecting unnecessary errors using /dev/null as shown below.
+grep -r hello /usr/ 2> /dev/null
+ 
+![image](https://user-images.githubusercontent.com/43535914/127679620-9f3530cf-2734-4e71-9333-0c3271f34c5c.png)
+
  
 ## Linux-commands 
 #### VIEW FILES/DIRECTORIES
@@ -277,19 +292,26 @@ unset VARIABLE_NAME |	Remove a variable	| unset VAR1
 export Variable=value	| To set value of an environment variable |	export VAR1=/usr/tmp
  
 
+#### Standard I/O Streams:
+In Bash and other Linux shells, when a program is executed, it uses three standard I/O streams. Each stream is represented by a numeric file descriptor:
+- 0 - stdin, the standard input stream.
+- 1 - stdout, the standard output stream.
+- 2 - stderr, the standard error stream.
+ 
 #### I/O REDIRECTION
 Redirection is a feature in Linux such that when executing a command, you can change the standard input/output devices.
 **Ex:** With the help of redirection operators you can copy the output of any command(s), file(s) into a file.
 Redirection	| Usage |	Description
 ----------- | ----- | ------------
-Input Redirection \< |	command \< file |	**Ex:**  If you want to attach a file to email you can use the input re-direction operator in the following format. <br> mail -s "Subject" Recipient_MailID < Filename
-Output Redirection \> |	command \> file	| Redirecting output to a file. Instead of displaying output on the cmd screen it will redirect to file. <br> **Ex:1**  ls -l \> file1 <br> **Ex:2**  data \> file1 <br> If you enter wrong command and redirect the output to file then it will display error on screen. Error will not be stored in file
-Error redirection 2\>	|command 2\> file |	Redirects error message to the file you specify. <br> **Ex:1**  mkdir dir1/dir2/dir3 2\> file1 <br> It redirects the error message of mkdir to file1 <br> **Ex:2**  (data;cal) 2\> file1 <br> The error message will be redirected to file1 and the output of cal command will be displayed on screen.
-Redirecting output and error &\> |	command &\> file |	If you want to store both output and error message in a file. <br> **Ex:** (data;cal) &\> file1
-Appending \>\> |	command \>\> file | Append to file. If you do not want a file to be overwritten but want to add more content to an existing file
-Redirecting  error without overriding | 2\>\> |	command 2\>\> file |	Redirects error message without overriding the contents of file. <br> Every time you execute 2\>, it will override the previous error message that is stored in file. But with 2\>\> it will append the error to the file.
-Redirecting output and error without overriding &\>\> |	command &\>\> file |	Redirects both output and error without overriding the contents of file. Every time you execute &\>, it will override the previous output/error that is stored in file. But with &\>\> it will append the data to the file.
-Heredoc \<\< |	Command \<\< delimiter <br> Any text/input <br> delimiter | \<\< is a type of redirection that allows you to pass multiple lines of input to a command. It reads the input until it finds a line containing the specified delimiter. Delimiter can be of any name, but note that you end with the same delimiter. <br> **Ex:** <br> wc -l << EOF <br> This is a <br> simple lookup program <br> EOF <br> o/p:  2
+Input Redirection ( \< ) |	command \< file |	**Ex:**  If you want to attach a file to email you can use the input re-direction operator in the following format. <br> mail -s "Subject" Recipient_MailID < Filename
+Output Redirection ( \> ) |	command \> file	| Redirecting output to a file. Instead of displaying output on the cmd screen it will redirect to file. <br> **Ex:1**  ls -l \> file1 <br> **Ex:2**  data \> file1 <br> If you enter wrong command and redirect the output to file then it will display error on screen. Error will not be stored in file
+Error redirection ( 2\> )	|command 2\> file |	Redirects error message to the file you specify. <br> **Ex:1**  mkdir dir1/dir2/dir3 2\> file1 <br> It redirects the error message of mkdir to file1 <br> **Ex:2**  (data;cal) 2\> file1 <br> The error message will be redirected to file1 and the output of cal command will be displayed on screen.
+Redirecting output and error ( &\> ) |	command &\> file |	If you want to store both output and error message in a file. <br> **Ex:** (data;cal) &\> file1
+Redirecting output and error ( 2\>&1 ) | command > file 2\>&1 <br> (OR) <br> command 2\>&1 > file | This is another alternative to redirect both output and error message to a file <br> **Ex:** (data;cal) 2\>&1 \> file1 
+Appending ( \>\> ) |	command \>\> file | Append to file. If you do not want a file to be overwritten but want to add more content to an existing file
+Redirecting  error without overriding ( 2\>\> ) |	command 2\>\> file |	Redirects error message without overriding the contents of file. <br> Every time you execute 2\>, it will override the previous error message that is stored in file. But with 2\>\> it will append the error to the file.
+Redirecting output and error without overriding ( &\>\> ) |	command &\>\> file |	Redirects both output and error without overriding the contents of file. Every time you execute &\>, it will override the previous output/error that is stored in file. But with &\>\> it will append the data to the file.
+Heredoc ( \<\< ) |	Command \<\< delimiter <br> Any text/input <br> delimiter | \<\< is a type of redirection that allows you to pass multiple lines of input to a command. It reads the input until it finds a line containing the specified delimiter. Delimiter can be of any name, but note that you end with the same delimiter. <br> **Ex:** <br> wc -l << EOF <br> This is a <br> simple lookup program <br> EOF <br> o/p:  2
 \| 	| command1 \| command2	| A pipe is a form of redirection that lets you run two or more commands, such that output of one command serves as input to the next command. <br> **Ex:** <br> head -5 file1 | tail -1 <br> head -5 file1 provides five lines and tail -1 provides last line that got from head command. So you will get fifth line from file1
  
 
