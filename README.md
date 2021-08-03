@@ -257,11 +257,16 @@ Here’s the bash script that calls your JAR file: my-webapp
  
 
 ### 19. What is SSH and why SSH is considered better than telnet?
-SSH, or Secure Shell, is a cryptographic network protocol for operating network services securely over an unsecured network. In simple words, it allows users to login and control their remote servers over the Internet. An SSH server will have SSH daemon running and depends on the distribution, you should be able to check whether the service is running (e.g. systemctl status sshd).
+SSH, or Secure Shell, is a cryptographic network protocol for operating network services securely over an unsecured network. In simple words, SSH is a secure protocol used as the primary means of connecting to Linux servers remotely. An SSH server will have SSH daemon running and depends on the distribution, you should be able to check whether the service is running (e.g. systemctl status sshd).
 Telnet also allows you to connect to a remote host but as opposed to SSH where the communication is encrypted, in telnet, the data is sent in clear text, so it doesn't considered to be secured because anyone on the network can see what exactly is sent, including passwords.
 
 ### 20. What is stored in ~/.ssh/known_hosts?
-This file is local to the user account and contains the known keys for remote hosts. Often these are collected from the hosts when connecting for the first time, but they can be added manually. The known_hosts file lets the client authenticate the server, to check that it isn't connecting to an impersonator.
+This is a very important file for SSH. The ~/.ssh/known_hosts file contains the SSH fingerprints of machines you've logged into. These fingerprints are generated from the remote server's SSH key when you secure shell into a remote machine for the first time. The known_hosts file lets the client authenticate the server, to check that it isn't connecting to an impersonator. 
+Note:
+If you get error like "Host key verification failed" when you try to ssh to a server then this means that the key of the remote host was changed and doesn't match the one that stored on the machine (in ~/.ssh/known_hosts).
+
+### 21.What is ssh-keygen used for?
+ssh-keygen is a tool for creating new authentication key pairs for SSH. Such key pairs are used for automating logins, single sign-on, and for authenticating hosts. 
  
 ## Linux-commands 
 #### VIEW FILES/DIRECTORIES
