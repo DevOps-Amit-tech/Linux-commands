@@ -230,9 +230,9 @@ rmdir	| rmdir \<dir\>	| Removes empty directory
 #### MANAGE FILES/DIRECTORIES
 Command	| Usage	| Description
 ------- | ----- | -----------
-cd	| cd | /path/to/directory	Change directory
+cd	| cd /path/to/directory	| Change directory
 |  |	cd  (or)  cd ~ 	| Navigate to home directory
-|  |	cd /	| Move to root directory
+|  |	cd /	| Navigate to root directory
 |  |	cd ..	| Navigating up one directory level (Ex: If you are in /usr/bin folder then typing cd .. command will navigate to /usr folder)
 cp |	cp \<file1\> \<file2\>	| Makes a copy of a file
 |  |	cp -p \<file1\> \<file2\> |	Copy file by preserving time stamp.
