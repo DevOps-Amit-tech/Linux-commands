@@ -144,6 +144,7 @@ When you list files or directories, you can identify a file type by viewing the 
 ### 12. what is the use of !! command?
 Simply typing !! in command line will repeat the execution of your previous command
 If you use it in conjunction with some other command then your last run command will be replaced by !! 
+ 
 ![image](https://user-images.githubusercontent.com/43535914/127644819-0faec6be-5e0a-4b66-8e8f-cf5b81667ca3.png)
 
 ### 13. What is the use of nohup command? 
