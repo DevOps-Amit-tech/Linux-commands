@@ -1,15 +1,20 @@
+## What is this repository for?
+
+This is list of useful linux questions and commands.
+
+### 1. What is Linux?
 Linux is an open source operating system developed by Linus Torvalds. Linux is just a kernel and a linux distribution makes it a usable operating system.
  
-### 1. What is Kernel?
+### 2. What is Kernel?
 kernel is the core of the operating system that manages everything. Kernel is kind of a thing which interacts with your hardware and manages CPU resources, memory resources, processes on any computer.
 
-### 2. What is Shell?
+### 3. What is Shell?
 Shell is just a program, a friendly interface that translates your commands into some low-level calls to the kernel.
 
-### 3. Simple Architecture:
+### 4. Simple Architecture:
 ![image](https://user-images.githubusercontent.com/43535914/126981748-d943ccd4-f290-4a13-a276-2fe6d7639650.png)
 
-### 4. What are Linux Distros?
+### 5. What are Linux Distros?
 Distros nothing but distributions are specific group of software
 In all linux distributions:
 * Linux kernel is same (mostly). 
@@ -22,21 +27,30 @@ Below mentioned are flavors of the above mentioned distributions
 Debian	=>	Mint, kali, Ubuntu, Parrot, Deepin 
 Red hat	=> 	Fedora, Centos (Community Enterprise Operating System), RHEL (Red Hat Enterprise Linux) 
 
-### 5. File system hierarchy:
-![image](https://user-images.githubusercontent.com/43535914/126982674-6caefcf4-bd46-4ee3-a702-09f86d7ebd7d.png)
+### 6. File system hierarchy:
+![image](https://user-images.githubusercontent.com/43535914/127991861-133917f3-befc-4280-8e35-351801895156.png)
 
-Directory Name | Description
--------------- | --------------
-/ | This is top level directory, also is called as ROOT directory. It is parent directory for all other directories.
-/root | It is home directory for root user (super user). It provides working environment for root user 
-/home |	Home directory. It provide working environment for all users other than root
-/usr | By default softwares are installed in /usr directory 
-(UNIX | Sharable Resources) 
-/bin | It contains commands used by all users (Binary files)
-/sbin | It contains commands used by only Super User(root) (Super user's binary files)
-/var | Contains variable data like mails, log files
+Directory | Name | Description
+--------- | ---- | --------------
+**/** | The Root Directory | This is top level directory, also called as ROOT directory. Everything on your Linux system is located under the / directory.
+**/root** | Root Home Directory | It is home directory for root user (super user). Instead of being located at /home/root, it’s located at /root. This is distinct from /, which is the system root directory.
+**/home** | Home Folders | It provide working environment for all users other than root. /home Contains a home folder for each user. <br> **Ex:** if you create a user named "bob" then you will have a home folder located at /home/bob. <br> Each user only has write access to their own home folder and must obtain elevated permissions (become the root user) to modify other files on the system.
+**/usr** | User Binaries & Read-Only Data | This directory contains libraries, source code, binaries and documentation required for second-level programs. The binary files of a user is stored in /usr/bin and the binary files of the system are stored in /usr/sbin. The system libraries are stored in /usr/lib. <br> **Ex:** useradd, atd, cron, userdel. 
+**/bin** | Essential User Binaries | Contains essential user binaries. Applications, programs, and commands that we use are located in this directory. <br> **Ex:** ps, ls, ping, grep, cp.
+**/sbin** | System Administration Binaries | It contains essential binaries that are generally intended to be run by the root user for system administration.
+**/lib** | Essential Shared Libraries | It holds the libraries needed by the binaries in /bin and /sbin directories.
+**/opt** | Optional Packages | Used for installing/storing the files of third-party applications that are not available from the distribution’s repository.
+**/dev** | Device Files | Stores device files. These include terminal devices, usb, or any device attached to the system. <br> **Ex:** /dev/tty1, /dev/usbmon0
+**/etc** | Configuration Files | Contains core configuration files. It controls the behavior of an operating system or application. This directory also contains startup and shutdown program scripts that are used to start or stop individual programs. <br> **Ex:** /etc/resolv.conf, /etc/logrotate.conf
+**/var** | Variable Files | This is where programs store runtime information like system log files (/var/log); packages and database files (/var/lib); emails (/var/mail); print queues (/var/spool); lock files (/var/lock); temp files needed across reboots (/var/tmp); etc <br> The files stored here are NOT cleaned automatically and hence it provides a good place for system administrators to look for information about their system behavior. <br> **Ex:** If you want to check the login history in your Linux system, just check the content of the file in /var/log/wtmp.
+**/boot** | Static Boot Files | Contains files needed to boot the system
+**/mnt** | Temporary Mount Points | Temporary mount directory for mounting file system
+**/lost+found** | Recovered Files | Each Linux file system has a lost+found directory and is useful for recovering files which may be broken due to unexpected shut-down.
+**/proc** | Kernel & Process Files |  It contains special files that represent system and process information. <br> 1. This is a pseudo filesystem contains information about running process. <br> **Ex:** /proc/{pid} directory contains information about the process with that particular pid. <br> 2. This is a virtual filesystem with text information about system resources. <br> **Ex:** if you want to check processor information in Linux (refer to the file /proc/cpuinfo); if you want to check memory usage of your Linux system(refer to /proc/meminfo file); If ypu want to know uptime (refer to /proc/uptime file)
+**/tmp** | Temporary Files | Applications store temporary files in the /tmp directory. Files under this directory are deleted when system is rebooted.
+**/selinux** | SELinux Virtual File System | If your Linux distribution uses SELinux for security (Fedora and Red Hat, for example), the /selinux directory contains special files used by SELinux. It’s similar to /proc. Ubuntu doesn’t use SELinux
 
-### 6. Terminal:
+### 7. Terminal:
 Terminal or command line or command prompt is basically a text interface to your computer. It allows us to send simple text commands to our computer to do things like navigate through a directory, copy a file, etc.
 
 ![image](https://user-images.githubusercontent.com/43535914/126983919-41650416-3a27-4641-ba95-7c725a9ebe24.png)
@@ -55,14 +69,14 @@ clear (or) ctrl+l	| To clear the terminal screen.
 exit | close the terminal or logout of current session.
 Up and Down arrow keys | To cycle through recently used commands in the terminal.
 
-### 7. Commands in linux:
+### 8. Commands in linux:
 Linux commands are simply programs which are executed by the shell. In linux there are thousands of commands. Sometimes the command which you are executing may not be available in your OS. In that case download & install required package from respective repository (like apt, yum) and then execute.
 
 **Ex:**
 "command not found" error while executing tree command
 tree is a command which is available in tree package. Download tree package and then execute that command
 
-### 8. Installing softwares/packages:
+### 9. Installing softwares/packages:
 In Linux, installation files are distributed as packages. A repository is a storage location from which your system retrieves and installs OS updates and applications. It is like a warehouse that consists of all packages.
 
 **Ex:** Inorder to install a package in ubuntu 
@@ -71,7 +85,7 @@ In Linux, installation files are distributed as packages. A repository is a stor
 
 Likewise "yum" is a repository for CentOS, "apk" is a repository for Alpine, etc
   
-### 9.  Basic linux commands:
+### 10.  Basic linux commands:
 Command | Usage | Description
 ------- | ----- | ------------
 date | date | Show the current date and time
@@ -82,8 +96,8 @@ man	| man \<command name\> |	Displays a help page based on your search query
 whatis |	whatis \<command name\> |	Displays brief description of command
 echo	| echo “Some text” |	Display contents
 
-### 10. File permissions:
-**10.1. Types of permissions:**
+### 11. File permissions:
+**11.1. Types of permissions:**
 Permission | Alphabetical notation | Numerical notation
 ---------- | --------------------- | ------------------
 Read |	r |	4
@@ -110,7 +124,7 @@ No permissions |  | 0
     chmod u+x,g-w file1   add execute permission to owner and remove write permission to group
     chmod u=w file1       Replace existing permissions with new permissions (For suppose owner has rwx permissions and you want to replace with only write permission then you                             can use this)
   
-**10.2. Types of ownership:** 
+**11.2. Types of ownership:** 
 owner | Notation
 ----- | --------
 User | u
@@ -125,7 +139,7 @@ Others | o
     Only user:           chown dave: example.txt
     Only group:          chown :mary example.txt
   
-### 11. Identifying file types:
+### 12. Identifying file types:
 A file type helps us in identifying the type of content that is saved in the file. Linux supports seven different types of files. 
 Symbol	| Type of file
 ------- | ------------
@@ -141,13 +155,13 @@ When you list files or directories, you can identify a file type by viewing the 
 ![image](https://user-images.githubusercontent.com/43535914/126990264-4d9aecf8-0caa-434e-b436-b1fb07e52752.png)
 
 
-### 12. what is the use of !! command?
+### 13. what is the use of !! command?
 Simply typing !! in command line will repeat the execution of your previous command
 If you use it in conjunction with some other command then your last run command will be replaced by !! 
  
 ![image](https://user-images.githubusercontent.com/43535914/127644819-0faec6be-5e0a-4b66-8e8f-cf5b81667ca3.png)
 
-### 13. What is the use of nohup command? 
+### 14. What is the use of nohup command? 
 Nohup, short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. The nohup command executes another program specified as its argument and ignores all SIGHUP (hangup) signals. SIGHUP is a signal that is sent to a process when its controlling terminal is closed. <br> Usually, when you run a program over SSH, if your connection drops or you log out, the session is terminated and all the processes executed from the terminal will stop. This is where the nohup command comes in handy. It ignores all hangup signals, and the process will continue to run. 
 
 To run the command in the background, append the & symbol at the end of the command as shown below.
@@ -164,7 +178,7 @@ To run the command in the background, append the & symbol at the end of the comm
  
 **o/p:**  nohup: ignoring input and appending output to 'nohup.out'
 
-### 14. What is /etc/resolv.conf file?
+### 15. What is /etc/resolv.conf file?
 The /etc/resolv. conf is resolver configuration file. It is used to configure DNS nameservers.
  
 **Ex:**
@@ -172,7 +186,7 @@ The /etc/resolv. conf is resolver configuration file. It is used to configure DN
     search devops.local
     nameserver 172.16.192.55
 
-### 14. What is /dev/null? 
+### 16. What is /dev/null? 
 /dev/null in Linux is a null device file. It’s a special file that’s present in every single Linux system. However, unlike most other virtual files, instead of reading, it’s used to write. Whatever you write to /dev/null will be discarded, forgotten into the void. This is a command-line hack that acts as a vacuum, that sucks anything thrown to it.
 This is not an executable file, so we cannot use piping using | operator to redirect to /dev/null. The only way is to use file redirections (\>, \>\>, or \<, \<\<).
 **Ex:**
