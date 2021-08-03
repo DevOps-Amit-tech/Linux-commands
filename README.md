@@ -69,14 +69,14 @@ clear (or) ctrl+l	| To clear the terminal screen.
 exit | close the terminal or logout of current session.
 Up and Down arrow keys | To cycle through recently used commands in the terminal.
 
-### 8. Commands in linux:
+### 8. What are commands in linux?
 Linux commands are simply programs which are executed by the shell. In linux there are thousands of commands. Sometimes the command which you are executing may not be available in your OS. In that case download & install required package from respective repository (like apt, yum) and then execute.
 
 **Ex:**
 "command not found" error while executing tree command
 tree is a command which is available in tree package. Download tree package and then execute that command
 
-### 9. Installing softwares/packages:
+### 9. How to install softwares/packages?
 In Linux, installation files are distributed as packages. A repository is a storage location from which your system retrieves and installs OS updates and applications. It is like a warehouse that consists of all packages.
 
 **Ex:** Inorder to install a package in ubuntu 
