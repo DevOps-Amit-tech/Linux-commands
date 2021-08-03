@@ -6,7 +6,10 @@ This is list of useful linux questions and commands.
 Linux is an open source operating system developed by Linus Torvalds. Linux is just a kernel and a linux distribution makes it a usable operating system.
  
 ### 2. What is Kernel?
-kernel is the core of the operating system that manages everything. Kernel is kind of a thing which interacts with your hardware and manages CPU resources, memory resources, processes on any computer.
+kernel is the core of the operating system that manages everything. Kernel is kind of a thing which interacts with your hardware and manages CPU resources, memory resources, processes on any computer. Kernel is responsible for tasks like:
+- Allocating memory
+- Schedule processes
+- Control CPU
 
 ### 3. What is Shell?
 Shell is just a program, a friendly interface that translates your commands into some low-level calls to the kernel.
@@ -200,13 +203,72 @@ grep -r hello /usr/ 2> /dev/null
  
 ![image](https://user-images.githubusercontent.com/43535914/127679620-9f3530cf-2734-4e71-9333-0c3271f34c5c.png)
 
+
+### 17. What are hidden files/directories and how to list them?
+A hidden folder/file is a folder or file which filesystem utilities do not display by default when showing a directory listing. Files with names beginning with a dot are hidden files. An example of these files are .bashrc, .KUBECONFIG, etc. <br> The command used to list them is, **ls -a**
+ 
+
+### 18. What is systemd?
+- Systemd (System 'd', d stands from daemon) is a system and service manager for Linux operating systems.
+- systemd is the first daemon to start during booting and the last daemon to terminate during shutdown. As an init implementation, it has a PID of 1.
+- If we visualize the unix/linux system in layers, systemd would fall directly after the linux kernel.
+**Hardware -> Kernel -> Daemons, System Libraries, Server Display**
+- Systemd provides a standard process for controlling what programs run when a Linux system boots up. The systemctl command is the primary tool to manage and interact with processes that are controlled by systemd.
+- On a system which uses systemd we would use "**journalctl**" to display the logs
+
+### 19. How to make a certain process/app a service?
+Say you have a JAR file and you need to run it as a service. Additionally, you want it to start automatically if/when system restarts. Linux has a built-in mechanism to create custom services, enabling them to get started at system boot time and start/stop them as a service.
+#####Step 1: Create a Service
+sudo vim /etc/systemd/system/my-webapp.service
+Copy/paste the following into the file /etc/systemd/system/my-webapp.service
+ 
+    [Unit]
+    Description=My Webapp Java REST Service
+    [Service]
+    User=ubuntu
+    # The configuration file application.properties should be here:
+
+    #change this to your workspace
+    WorkingDirectory=/home/ubuntu/workspace
+    
+    #path to executable. The executable is a bash script which calls jar file 
+    ExecStart=/home/ubuntu/workspace/my-webapp
+
+    SuccessExitStatus=143
+    TimeoutStopSec=10
+    Restart=on-failure
+    RestartSec=5
+
+    [Install]
+    WantedBy=multi-user.target
+ 
+##### Step 2: Create a Bash Script to Call Your Service and provide execute permission for the file: sudo chmod u+x my-webapp
+Here’s the bash script that calls your JAR file: my-webapp
+
+    #!/bin/sh
+    sudo /usr/bin/java -jar my-webapp-1.0-SNAPSHOT.jar server config.yml
+
+
+##### Step 3: Start the Service
+    sudo systemctl daemon-reload
+    sudo systemctl enable my-webapp.service
+    sudo systemctl start my-webapp
+    sudo systemctl status my-webapp 
+ 
+
+### 19. What is SSH and why SSH is considered better than telnet?
+SSH, or Secure Shell, is a cryptographic network protocol for operating network services securely over an unsecured network. In simple words, it allows users to login and control their remote servers over the Internet. An SSH server will have SSH daemon running and depends on the distribution, you should be able to check whether the service is running (e.g. systemctl status sshd).
+Telnet also allows you to connect to a remote host but as opposed to SSH where the communication is encrypted, in telnet, the data is sent in clear text, so it doesn't considered to be secured because anyone on the network can see what exactly is sent, including passwords.
+
+### 20. What is stored in ~/.ssh/known_hosts?
+This file is local to the user account and contains the known keys for remote hosts. Often these are collected from the hosts when connecting for the first time, but they can be added manually. The known_hosts file lets the client authenticate the server, to check that it isn't connecting to an impersonator.
  
 ## Linux-commands 
 #### VIEW FILES/DIRECTORIES
 Command |	Usage	| Description
 ------- | ----- | -----------
 ls | ls |	lists all directories/files in the current terminal directory.
-|  | ls -l	| lists files/folders in long table format (shows file/directory size, modified date & 		 time,ownership,permissions)
+|  | ls -l	| lists files/folders in long table format (shows file permissions, ownership, number of links, file/directory size, last modified date & time)
 |  | ls –a	| List all the files including the hidden ones
 |  | ls –t |	List the files sorted by last modified time
 |  | ls -lrt  (or)  ll |	lists the contents of the directory with all the details, in reverse order of their modification time (older files will be displayed first).
@@ -249,6 +311,7 @@ cd	| cd /path/to/directory	| Change directory
 |  |	cd  (or)  cd ~ 	| Navigate to home directory
 |  |	cd /	| Navigate to root directory
 |  |	cd ..	| Navigating up one directory level (Ex: If you are in /usr/bin folder then typing cd .. command will navigate to /usr folder)
+|  | cd - | Change to last visited path
 cp |	cp \<file1\> \<file2\>	| Makes a copy of a file
 |  |	cp -p \<file1\> \<file2\> |	Copy file by preserving time stamp.
 |  | cp -i \<file1\> \<file2\>	| cp and mv commands doesn’t prompt while overwriting an existing file. Use -i interactive option to enable prompt.
@@ -494,8 +557,8 @@ Command	| Usage	| Description
 ------- | ----- | ----------- 
 ssh	| ssh [user-name]@[remote-ip] | SECURE SHELL. Used to connect and login to a remote server and provides secure encrypted communication (ssh default port 22)
 logout |   |		To logout from already taken remote console.
- 
 
+ 
 #### FILE TRANSFER
 To copy files between servers
 **Windows to Linux:**		winscp
