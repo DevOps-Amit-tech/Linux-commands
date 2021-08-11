@@ -4,18 +4,18 @@ This is list of useful linux questions and commands.
 
 ### 1. What is Linux?
 Linux is an open source operating system developed by Linus Torvalds. Linux is just a kernel and a linux distribution makes it a usable operating system.
- 
-### 2. What is Kernel?
+
+### 2. Simple Architecture:
+![image](https://user-images.githubusercontent.com/43535914/126981748-d943ccd4-f290-4a13-a276-2fe6d7639650.png)
+
+### 3. What is Kernel?
 kernel is the core of the operating system that manages everything. Kernel is kind of a thing which interacts with your hardware and manages CPU resources, memory resources, processes on any computer. Kernel is responsible for tasks like:
 - Allocating memory
 - Schedule processes
 - Control CPU
 
-### 3. What is Shell?
-Shell is just a program, a friendly interface that translates your commands into some low-level calls to the kernel.
-
-### 4. Simple Architecture:
-![image](https://user-images.githubusercontent.com/43535914/126981748-d943ccd4-f290-4a13-a276-2fe6d7639650.png)
+### 4. What is Shell?
+The shell acts as an interface between kernel and end user or application. Shell is just a program, a friendly interface that translates your commands into some low-level calls to the kernel.
 
 ### 5. What are Linux Distros?
 Distros nothing but distributions are specific group of software
@@ -48,7 +48,7 @@ Directory | Name | Description
 **/var** | Variable Files | This is where programs store runtime information like system log files (/var/log); packages and database files (/var/lib); emails (/var/mail); print queues (/var/spool); lock files (/var/lock); temp files needed across reboots (/var/tmp); etc <br> The files stored here are NOT cleaned automatically and hence it provides a good place for system administrators to look for information about their system behavior. <br> **Ex:** If you want to check the login history in your Linux system, just check the content of the file in /var/log/wtmp.
 **/boot** | Static Boot Files | Contains files needed to boot the system
 **/mnt** | Temporary Mount Points | Temporary mount directory for mounting file system
-**/lost+found** | Recovered Files | Each Linux file system has a lost+found directory and is useful for recovering files which may be broken due to unexpected shut-down.
+**/lost+found** | Recovered Files | Same as "restore". Each Linux file system has a lost+found directory and is useful for recovering files which may be broken due to unexpected shut-down.
 **/proc** | Kernel & Process Files |  It contains special files that represent system and process information. <br> 1. This is a pseudo filesystem contains information about running process. <br> **Ex:** /proc/{pid} directory contains information about the process with that particular pid. <br> 2. This is a virtual filesystem with text information about system resources. <br> **Ex:** if you want to check processor information in Linux (refer to the file /proc/cpuinfo); if you want to check memory usage of your Linux system(refer to /proc/meminfo file); If ypu want to know uptime (refer to /proc/uptime file)
 **/tmp** | Temporary Files | Applications store temporary files in the /tmp directory. Files under this directory are deleted when system is rebooted.
 **/selinux** | SELinux Virtual File System | If your Linux distribution uses SELinux for security (Fedora and Red Hat, for example), the /selinux directory contains special files used by SELinux. It’s similar to /proc. Ubuntu doesn’t use SELinux
@@ -296,7 +296,7 @@ tail	| tail \<filename\>	| output the last 10 lines of file
 Command	| Usage	| Description
 ------- | ----- | -----------
 touch | touch \<filename\> | It is used to create empty file (0 bytes). It is also used to create, change and modify time stamps of a file.
-vi | vi \<filename\> | Create a file using vi editor: <br> Press key “ i ” for insert mode as it allows you to enter text as needed. <br> Press **ESCAPE** key once you are done with file. <br>  **:wq** --- Save and quit (w for save and q for quit). <br>  **:q** --- quit without save if no changes are made to file. <br> **:q!** --- quit without saving changes made to a file
+vi | vi \<filename\> | vi stands for ‘Visual Improved’. Open editor by using command vi. The vi editor has 2 modes: 1) Insert mode 2) for editing <br> Go to insert mode, by pressing letter **i** on keyboard as it allows you to edit the file. <br> Once you are done editing the file, Exit insert mode – Press **ESCAPE** key. <br>  **:wq** --- Save and quit (w for save(write) and q for quit). <br>  **:q** --- quit without save if no changes are made to file. <br> **:q!** --- quit without saving changes made to a file
 cat |	cat > [filename]	| Create a file and insert contents to that file on terminal. Press Ctrl+D to exit. If file already exists it overwrites.
 |  | cat [file1] \> [file2] | Copy contents of one file to another. (\>  Can also be used to redirect the output of cat command to a file rather than standard output)
 |  |cat [file1] \>\> [file2] | Instead of overwriting file2, it appends contents of file1 to file2 using redirection operator \>\>
@@ -307,6 +307,19 @@ rmdir	| rmdir \<dir\>	| Removes empty directory
 | rm |	rm \<file\>	| Delete a file
 |  | rm -r \<dir\> |	Delete empty/non-empty directories recursively.
 |  | rm -f \<file\>	| Prompts error while deleting non-existent file/directory. Use -f to suppress such prompts
+
+##### Vi Editor shortcuts
+1) Copy a word <br>
+**yw** – copies a word – from where the cursor is placed till the end of the word (**Y** stands for yank (Greek word) which means copy, **P** – paste) <br>
+**2yw** – copies 2 words.
+2) Copy a line <br>
+**yy** – copies entire line <br>
+**5yy** – copies 5 entire lines
+3) Delete word <br>
+**dw** – deletes a word
+4) Delete a line <br>
+**dd** – deletes a line <br>
+**5dd** – deletes 5 entire lines
 
  
 #### MANAGE FILES/DIRECTORIES
